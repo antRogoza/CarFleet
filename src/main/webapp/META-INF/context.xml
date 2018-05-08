@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/">
+    <Resource name = "jdbc/car_fleet" auth = "Container" type = "javax.sql.DataSource"
+              maxActive = "80" maxIdle = "50" maxWait = "10000"
+              username = "root" password = "antRogoza97"
+              driverClassName = "com.mysql.cj.jdbc.Driver"
+              connectionProperties = "useUnicode=yes;characterEncoding=UTF-8;allowMultiQueries=true;useSSL=false;useLegacyDatetimeCode=false;serverTimezone=UTC"
+              url = "jdbc:mysql://localhost:3306/car_fleet?characterEncoding=UTF-8"/>
+</Context>
