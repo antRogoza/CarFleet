@@ -2,7 +2,7 @@ import model.dao.UserDao;
 import model.dao.factory.DaoFactory;
 import model.dao.factory.DataSourceFactory;
 import model.entity.User;
-import view.View;
+import view.View; // wrong import - the project will not be compiled
 
 import javax.sql.DataSource;
 import java.sql.Connection;
