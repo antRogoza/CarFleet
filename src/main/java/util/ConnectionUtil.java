@@ -10,7 +10,7 @@ public class ConnectionUtil {
                 connection.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // LOG
         }
     }
 
@@ -20,7 +20,7 @@ public class ConnectionUtil {
                 connection.rollback();
             }
         } catch (SQLException e1) {
-            e1.printStackTrace();
+            e1.printStackTrace(); // LOG
         }
     }
 }

@@ -1,6 +1,6 @@
 package model.entity;
 
-import model.entity.proxy.RoleProxy;
+import model.entity.proxy.RoleProxy; // see ConfirmationProxy
 import model.entity.proxy.RouteProxy;
 
 import java.util.List;

@@ -37,6 +37,7 @@ public class CommandCreator {
         return CommandFactoryHolder.instance;
     }
 
+    // very complicated method - should be split to some separated methods
     public String action(HttpServletRequest request, HttpServletResponse response) throws RuntimeException {
         Long authToken = (Long) request.getSession().getAttribute(X_AUTH_TOKEN);
         String commandName = request.getParameter(COMMAND);

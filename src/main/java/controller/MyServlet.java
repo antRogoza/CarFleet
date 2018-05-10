@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MyServlet extends HttpServlet {
+public class MyServlet extends HttpServlet { // choose more appropriate name, e.g. MainServlet or so..
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -27,13 +27,13 @@ public class MyServlet extends HttpServlet {
             DaoFactory daoFactory = DaoFactory.getDaoFactory(connection);
             UserDao userDao = daoFactory.createUserDao();
             List<User> userList = userDao.findAll();
-            System.out.println(userList);
+            System.out.println(userList); // LOG !
             connection.commit();
         } catch (SQLException e) {
             //ConnectionUtil.rollback(connection);
-            e.printStackTrace();
+            e.printStackTrace(); // LOG
         } finally {
-           //ConnectionUtil.close(connection);
+           //ConnectionUtil.close(connection); // ?
         }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
 

@@ -52,16 +52,16 @@ public class UserServiceImpl implements UserService {
                 throw new LoginNotFoundException(email, ExceptionMessage.EMAIL_NOT_FOUND_ERROR);
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // LOG
         }
         return user;
     }
 
     @Override
     public User register(User user) throws LoginAlreadyExistsException, IncorrectDataForUserException {
-        validation(user);
+        validation(user); // exception business logic driven is not the best way, but in that case can be
         User savedUser = null;
-        DataSource dataSource = DataSourceFactory.getInstance().getDataSource();
+        DataSource dataSource = DataSourceFactory.getInstance().getDataSource(); // is any exception possible here?
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
             RoleDao roleDao = daoFactory.createRoleDao();
             Role role = roleDao.findByName(USER_ROLE);
             savedUser = userDao.save(user);
-            userDao.setUserRole(savedUser.getId(), role.getId());
+            userDao.setUserRole(savedUser.getId(), role.getId()); // why setting of user role is the separate action?
             connection.commit();
         } catch (SQLIntegrityConstraintViolationException ex) {
             ConnectionUtil.rollback(connection);
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
             throw new LoginAlreadyExistsException(ExceptionMessage.EMAIL_EXIST_ERROR);
         } catch (SQLException ex) {
             ConnectionUtil.rollback(connection);
-            ex.printStackTrace();
+            ex.printStackTrace(); // use LOG
         } finally {
             ConnectionUtil.close(connection);
         }
@@ -89,19 +89,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getCurrentUser(HttpServletRequest request) {
         Long id = (Long) request.getSession().getAttribute(X_AUTH_TOKEN);
-        User user = null;
+        User user = null; // move into try {}
         DataSource dataSource = DataSourceFactory.getInstance().getDataSource();
         try (Connection connection = dataSource.getConnection()) {
             DaoFactory daoFactory = DaoFactory.getDaoFactory(connection);
             UserDao userDao = daoFactory.createUserDao();
             user = userDao.findOne(id);
-            LOG.debug("DAO: User was found");
+            LOG.debug("DAO: User was found"); // add info about user
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // LOG.warn() || LOG.error()
         }
-        return user;
+        return user; // move into try {}
     }
 
+    // why it is public but not in interface? -> change to protected at least?
     public void validation(User user) throws IncorrectDataForUserException {
         if (!isEmailValid(user.getEmail())) {
             throw new IncorrectDataForUserException(EMAIL_PATTERN_ERROR);
@@ -111,6 +112,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    // move to util class
+    // add unit tests
     boolean isEmailValid(String email) {
         final String regex = "^[a-zA-Z0-9.!#$%&'*+\\/=?^_`\\{|\\}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(regex);
@@ -118,6 +121,8 @@ public class UserServiceImpl implements UserService {
         return m.matches();
     }
 
+    // move to util class
+    // add unit tests
     boolean isPasswordValid(String password) {
         if (password.length() < 5 || password.length() > 30)
             return false;

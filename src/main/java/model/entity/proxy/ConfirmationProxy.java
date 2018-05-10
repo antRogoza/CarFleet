@@ -1,5 +1,7 @@
 package model.entity.proxy;
 
+// should not be any unused imports
+
 import model.dao.UserDao;
 import model.dao.factory.DaoFactory;
 import model.dao.factory.DataSourceFactory;

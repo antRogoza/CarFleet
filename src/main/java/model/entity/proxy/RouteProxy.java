@@ -23,9 +23,9 @@ public class RouteProxy extends Route {
                 BusDao busDao = daoFactory.createBusDao();
                 return busDao.findByRoute(getId());
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // see BusProxy
             }
-            return super.getBuses();
+            return super.getBuses(); // see BusProxy
         }
         return super.getBuses();
     }

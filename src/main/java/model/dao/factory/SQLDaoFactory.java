@@ -5,7 +5,7 @@ import model.dao.impl.*;
 
 import java.sql.Connection;
 
-public class SQLDaoFactory extends DaoFactory {
+public class SQLDaoFactory extends DaoFactory { // JDBCDaoFactory ?
     private Connection connection;
 
     private SQLDaoFactory(Connection connection) {

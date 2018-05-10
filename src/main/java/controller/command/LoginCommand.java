@@ -32,7 +32,7 @@ public class LoginCommand implements Command{
                     ExceptionMessage.getMessage(e.getMessage()));
             return Pages.LOGIN;
         }
-        if (user == null || !user.getPassword().equals(password)) {
+        if (user == null || !user.getPassword().equals(password)) { // can password be null?
             request.getSession().setAttribute(EXCEPTION,
                     ExceptionMessage.getMessage(ExceptionMessage.WRONG_PASSWORD_ERROR));
             return Pages.LOGIN;

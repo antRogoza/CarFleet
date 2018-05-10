@@ -24,9 +24,9 @@ public class BusProxy extends Bus {
                 UserDao userDao = daoFactory.createUserDao();
                 return userDao.findByBus(getId());
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // add some logger (e.g. log4j) you should no have any printStackTrace() in code
             }
-            return super.getUsers();
+            return super.getUsers(); // NullPointerException will be thrown when that code will be reached
         }
         return super.getUsers();
     }
@@ -39,9 +39,9 @@ public class BusProxy extends Bus {
                 RouteDao busDao = daoFactory.createRouteDao();
                 return busDao.findByBus(getId());
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // the same as above
             }
-            return super.getRoutes();
+            return super.getRoutes(); // the same as above
         }
         return super.getRoutes();
     }

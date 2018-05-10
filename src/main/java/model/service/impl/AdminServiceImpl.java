@@ -2,7 +2,7 @@ package model.service.impl;
 
 import model.service.AdminService;
 
-public class AdminServiceImpl implements AdminService {
+public class AdminServiceImpl implements AdminService { // why do you implements interface but still uses static methods?
     private AdminServiceImpl() {
     }
 

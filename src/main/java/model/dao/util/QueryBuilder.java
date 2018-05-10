@@ -1,5 +1,8 @@
 package model.dao.util;
 
+// format that class as well (check all other) - use java code convention
+// (!) I haven't found any unit test for that functionality - critical
+
 public class QueryBuilder {
     private StringBuilder query;
 

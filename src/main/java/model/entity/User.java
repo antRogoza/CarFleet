@@ -184,7 +184,7 @@ public class User implements Entity<Long>{
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + password + '\'' + // security issue
                 ", roles=" + roles +
                 ", confirmations=" + confirmations +
                 ", buses=" + buses +
